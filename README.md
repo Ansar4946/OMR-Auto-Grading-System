@@ -339,7 +339,7 @@ GitHub: https://github.com/alhattami0
 
 التخصص:
 علوم حاسوب
-ذكاء اصطناعي – رؤية حاسوبية – أنظمة تعليمية
+
 
 ⭐ Support the Project
 
