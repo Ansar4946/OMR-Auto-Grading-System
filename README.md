@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" width="100%">
+  <img src="assets/Gemini_Generated_Image_verrr2verrr2verr.png" width="100%">
 </p>
 
 <h1 align="center">OMR Auto Grading System</h1>
