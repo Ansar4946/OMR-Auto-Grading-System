@@ -193,7 +193,8 @@ Artificial Intelligence – Computer Vision – Educational Systems
 
 نظام ذكي لتصحيح أوراق الإجابة باستخدام لغة بايثون،
 يعتمد على الرؤية الحاسوبية (OpenCV)، وواجهة رسومية حديثة باستخدام PySide6،
-مع قاعدة بيانات SQLite وتحليل إحصائي وتصدير النتائج إلى Excel.
+مع قاعدة بيانات SQLite وتحليل إحصائي وتصدير النتائج إلى Excel
+---
 
 🚀 فكرة المشروع (عربي)
 
@@ -202,7 +203,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 عن طريق قراءة ورقة الإجابة باستخدام الكاميرا أو صورة ثابتة،
 ثم استخراج الإجابات، تصحيحها تلقائيًا، حساب الدرجة،
 وحفظ النتائج في قاعدة بيانات مع إمكانية تحليلها وتصديرها.
-
+---
 النظام مناسب لـ:
 
 المدارس
@@ -212,7 +213,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 المعاهد
 
 المراكز التعليمية
-
+---
 🖥️ واجهة النظام (GUI)
 
 يوفر النظام واجهة رسومية سهلة الاستخدام تتيح:
@@ -236,7 +237,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 تحليل الدرجات إحصائيًا
 
 تصدير النتائج إلى ملف Excel
-
+---
 ✨ ميزات النظام (عربي)
 🧠 المعالجة الذكية للصور
 
@@ -271,7 +272,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 اختيار الطالب من قائمة منسدلة
 
 عرض آخر صورة ورقة مصححة لكل طالب
-
+---
 🗂️ قاعدة البيانات
 
 تخزين:
@@ -291,7 +292,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 إمكانية مسح جميع النتائج بضغطة زر
 
 قاعدة بيانات محلية بدون الحاجة إلى خادم
-
+---
 📊 التحليل الإحصائي
 
 حساب متوسط الدرجات
@@ -301,7 +302,7 @@ Artificial Intelligence – Computer Vision – Educational Systems
 الانحراف المعياري
 
 عرض مخطط Histogram لتوزيع الدرجات
-
+---
 📥 تصدير النتائج إلى Excel
 
 تصدير النتائج النهائية بصيغة .xlsx
@@ -342,7 +343,7 @@ StudentID_ExamCode_Timestamp.png
 
 
 إمكانية عرض الصورة لاحقًا لكل طالب
-
+---
 🎯 الخلاصة (عربي)
 
 يوفر هذا النظام حلاً متكاملًا ودقيقًا لتصحيح الاختبارات الورقية
