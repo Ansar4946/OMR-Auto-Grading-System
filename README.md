@@ -140,7 +140,7 @@ The system provides a modern and user-friendly GUI that allows the user to:
 
 ## 📂 Project Structure
 
-
+```
 OMR-Auto-Grading-System/
 │
 ├── gui.py # GUI application
@@ -152,7 +152,7 @@ OMR-Auto-Grading-System/
 ├── assets/ # README images
 ├── omr_results.db # SQLite database
 └── README.md
-
+```
 
 ---
 
