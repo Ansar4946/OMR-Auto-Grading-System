@@ -168,7 +168,7 @@ Specialization:
 Computer Science
 Artificial Intelligence – Computer Vision – Educational Systems
 
-===============================================================
+---
 
 📄 نظام التصحيح الآلي لورق الإجابات OMR
 واجهة رسومية + قاعدة بيانات + تحليل (بايثون)
