@@ -167,8 +167,12 @@ python gui.py
 Specialization:
 Computer Science
 Artificial Intelligence – Computer Vision – Educational Systems
+---
+## 📸 System Screenshots
+![Analytics](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/analytics.png)
 
 ---
+
 
 📄 نظام التصحيح الآلي لورق الإجابات OMR
 واجهة رسومية + قاعدة بيانات + تحليل (بايثون)
