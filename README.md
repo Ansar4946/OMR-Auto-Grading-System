@@ -1,3 +1,12 @@
+<p align="center">
+  <img src="assets/banner.png" width="100%">
+</p>
+
+<h1 align="center">OMR Auto Grading System</h1>
+<p align="center">
+  Computer Vision • Python • OpenCV • PySide6
+</p>
+
 # 📄 OMR Auto Grading System
 ### GUI + Database + Analytics (Python)
 
