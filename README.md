@@ -169,7 +169,11 @@ Computer Science
 Artificial Intelligence – Computer Vision – Educational Systems
 ---
 ## 📸 System Screenshots
-![Analytics](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/1.png)
+![Ex1](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/1.png)
+![Ex1](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/2.png)
+![Ex1](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/3.png)
+![Ex1](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/4.png)
+![Ex1](https://raw.githubusercontent.com/alhattami0/OMR-Auto-Grading-System/main/assets/5.png)
 
 ---
 
