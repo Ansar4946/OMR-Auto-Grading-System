@@ -161,6 +161,7 @@ OMR-Auto-Grading-System/
 ```bash
 pip install opencv-python numpy pyside6 pandas matplotlib openpyxl
 python gui.py
+```
 🎯 Conclusion (English)
 
 Specialization:
