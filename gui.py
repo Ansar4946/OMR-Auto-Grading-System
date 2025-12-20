@@ -23,7 +23,7 @@ from omr_core import process_omr, detect_answer_key, get_debug_stack
 import analytics
 
 
-# ===================== Dialog: إدارة الطلاب =====================
+
 class StudentsDialog(QDialog):
     """
     إدارة الطلاب:
