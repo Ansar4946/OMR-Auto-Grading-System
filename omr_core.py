@@ -56,6 +56,50 @@ def _warp_perspective(img, pts):
     return warp, matrix
 
 
+
+# ----------------- اكتشاف شبكة الفقاعات من الترويسة الوردية A|B|C|D -----------------
+
+def _extract_grid(frame_bgr):
+    """
+    يبحث عن الترويسة الوردية الداكنة (A|B|C|D) ثم يقص الشبكة تحتها حتى نهاية
+    إطار الجدول. يرجع الصورة المقصوصة (WIDTH x HEIGHT) أو None إذا لم تُوجد.
+    """
+    hsv = cv2.cvtColor(frame_bgr, cv2.COLOR_BGR2HSV)
+    mask = ((hsv[..., 1] > 110) & (hsv[..., 2] > 90) &
+            ((hsv[..., 0] > 135) | (hsv[..., 0] < 5))).astype(np.uint8) * 255
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    if not contours:
+        return None
+
+    x, y, w, h = cv2.boundingRect(max(contours, key=cv2.contourArea))
+    H, W = frame_bgr.shape[:2]
+    # الترويسة يجب أن تكون عريضة نسبياً وليست بقعة صغيرة
+    if w < 0.1 * W or w < 2 * h:
+        return None
+
+    top = y + h
+    # الحد الأسفل: نتتبع الخط الوردي على الحافة اليسرى للجدول
+    strip = frame_bgr[top:, x:x + 5].astype(int)
+    darkness = (255 * 3 - strip.sum(2)).mean(1)
+    on = darkness > 25
+    bottom = top
+    gap = 0
+    for i, v in enumerate(on):
+        if v:
+            bottom = top + i
+            gap = 0
+        else:
+            gap += 1
+            if gap > 15:
+                break
+    bottom = min(bottom, H)
+    if bottom - top < h * 2:
+        return None
+
+    grid = frame_bgr[top:bottom, x:x + w]
+    return cv2.resize(grid, (WIDTH, HEIGHT))
+
 # ----------------- تقسيم الشبكة وحساب البكسلات -----------------
 
 def _split_boxes(thresh_img, questions, choices):
@@ -63,7 +107,10 @@ def _split_boxes(thresh_img, questions, choices):
     تقسيم صورة الأسئلة (بعد الـ threshold) إلى مربعات صغيرة (سؤال × اختيار).
     يرجع قائمة طولها questions*choices.
     """
-    rows = np.vsplit(thresh_img, questions)
+    # القص لأقرب مضاعف حتى لا يفشل التقسيم عندما لا يقبل 700 القسمة (مثل 12 سؤال)
+    h = thresh_img.shape[0] // questions * questions
+    w = thresh_img.shape[1] // choices * choices
+    rows = np.vsplit(thresh_img[:h, :w], questions)
     boxes = []
     for r in rows:
         cols = np.hsplit(r, choices)
@@ -148,11 +195,16 @@ def detect_answer_key(frame_bgr, questions, choices):
 
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     rects = _rect_contours(contours)
-    if len(rects) == 0:
-        return img, []
+    grid = _extract_grid(frame_bgr)
 
     # نأخذ أكبر مستطيل كأنه ورقة الأسئلة
-    warp_color, _ = _warp_perspective(img, rects[0])
+    # (إذا لم يوجد مستطيل نعتبر الصورة كلها هي شبكة الفقاعات، مثل صورة مقصوصة)
+    if grid is not None:
+        warp_color = grid
+    elif len(rects) == 0:
+        warp_color = img.copy()
+    else:
+        warp_color, _ = _warp_perspective(img, rects[0])
     warp_gray = cv2.cvtColor(warp_color, cv2.COLOR_BGR2GRAY)
     _, thresh = cv2.threshold(
         warp_gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU
@@ -187,12 +239,15 @@ def process_omr(frame_bgr, questions, choices, correct_answers):
 
     contours, _ = cv2.findContours(edges, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     rects = _rect_contours(contours)
-    if len(rects) == 0:
-        # لم يتم العثور على ورقة واضحة
-        return original, 0.0, [0] * questions, [0] * questions
+    grid = _extract_grid(frame_bgr)
 
-    # الورقة الرئيسية (شبكة الأسئلة)
-    warp_color, _ = _warp_perspective(img, rects[0])
+    # الورقة الرئيسية (شبكة الأسئلة)؛ بدون مستطيل نستخدم الصورة كلها (صورة مقصوصة)
+    if grid is not None:
+        warp_color = grid
+    elif len(rects) == 0:
+        warp_color = img.copy()
+    else:
+        warp_color, _ = _warp_perspective(img, rects[0])
 
     warp_gray = cv2.cvtColor(warp_color, cv2.COLOR_BGR2GRAY)
     _, thresh = cv2.threshold(

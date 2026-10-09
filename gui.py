@@ -375,7 +375,7 @@ class MainWindow(QMainWindow):
 
         self.questions_spin = QSpinBox()
         self.questions_spin.setRange(1, 100)
-        self.questions_spin.setValue(10)
+        self.questions_spin.setValue(12)
 
         self.choices_spin = QSpinBox()
         self.choices_spin.setRange(2, 10)
@@ -383,7 +383,7 @@ class MainWindow(QMainWindow):
 
         self.ans_edit = QLineEdit()
         self.ans_edit.setPlaceholderText("e.g. 0,1,2,3,0,1,2,3,0,1")
-        self.ans_edit.setText("0,1,2,3,0,1,2,3,0,1")
+        self.ans_edit.setText("2,2,3,1,0,0,0,0,2,2,3,3")
 
         settings_layout.addRow("Questions:", self.questions_spin)
         settings_layout.addRow("Choices per Q:", self.choices_spin)
